@@ -7,12 +7,12 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 
-public class Httputil {
-	public static void sendHttpRequest(final String address){
-		new Thread(new Runnable() {
-			
-			@Override
-			public void run() {
+public class HttpUtils {
+	public static String sendHttpRequest(final String address){
+//		new Thread(new Runnable() {
+//			
+//			@Override
+//			public void run() {
 				URL url;
 				try {
 					url = new URL(address);
@@ -25,6 +25,9 @@ public class Httputil {
 					if(responseCode == 200){
 						InputStream in = conn.getInputStream();
 						String result = StreamUtils.readFromStream(in);
+						System.out.println(result);
+						return result;
+						
 					}
 					
 				} catch (MalformedURLException e) {
@@ -34,8 +37,8 @@ public class Httputil {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				
+				return null;
 			}
-		}).start();
+//		}).start();
 	}
-}
+
