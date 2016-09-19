@@ -5,7 +5,6 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.net.URLConnection;
 
 public class HttpUtils {
 	
@@ -25,11 +24,10 @@ public class HttpUtils {
 					conn.setReadTimeout(8000);
 					conn.connect();
 					String result = null;
-					int responseCode = conn.getResponseCode();
-					if(responseCode == 200){
-						InputStream in = conn.getInputStream();
-						result = StreamUtils.readFromStream(in);
-					}
+					InputStream in = conn.getInputStream();
+					result = StreamUtils.readFromStream2(in);
+					
+					System.out.println(result);
 					if(listener != null){
 						listener.onFinish(result);
 					}

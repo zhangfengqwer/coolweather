@@ -1,6 +1,11 @@
 package com.coolweather.app.bean;
 
 public class Province {
+	@Override
+	public String toString() {
+		return "Province [provinceName=" + provinceName + ", provinceCode="
+				+ provinceCode + "]";
+	}
 	private int id;
 	private String provinceName;
 	private String provinceCode;
