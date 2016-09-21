@@ -38,6 +38,7 @@ public class CoolWeatherDB {
 		db = dbHelper.getWritableDatabase();
 	}
 	
+	
 	/**
 	 * 获取CoolWeatherDB的实例
 	 */
@@ -72,7 +73,6 @@ public class CoolWeatherDB {
 			province.setProvinceName(cursor.getString(cursor.getColumnIndex("province_name")));
 			province.setProvinceCode(cursor.getString(cursor.getColumnIndex("province_code")));
 			list.add(province);
-			System.out.println(province);
 		}
 		return list;
 	}
@@ -116,7 +116,7 @@ public class CoolWeatherDB {
 			ContentValues values = new ContentValues();
 			values.put("county_name", county.getCountyName());
 			values.put("county_code", county.getCountyCode());
-			values.put("province_id", county.getCity_id());
+			values.put("city_id", county.getCity_id());
 			db.insert("county", null, values);
 		}
 	}

@@ -27,7 +27,8 @@ public class HttpUtils {
 					InputStream in = conn.getInputStream();
 					result = StreamUtils.readFromStream2(in);
 					
-					System.out.println(result);
+//					System.out.println(result);
+					
 					if(listener != null){
 						listener.onFinish(result);
 					}

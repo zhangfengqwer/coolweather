@@ -14,21 +14,21 @@ public class Utility {
 	/**
 	 * 解析和处理服务器返回的省级数据
 	 */
-	public synchronized static boolean handleProvincesResponse(CoolWeatherDB coolWeatherDB, 
+	public static boolean handleProvincesResponse(CoolWeatherDB coolWeatherDB, 
 			String response){
 		if(!TextUtils.isEmpty(response)){
 			String[] allProvinces = response.split(",");
 			
 			if(allProvinces != null && allProvinces.length > 0){
 				for (String s : allProvinces) {
-					Log.i("TAG", s);
+					Log.i("S", s);
 					String[] strings = s.split("\\|");
 					Province p = new Province();
 					p.setProvinceCode(strings[0]);
 					p.setProvinceName(strings[1]);
 					coolWeatherDB.saveProvince(p);
-					return true;
 				}
+				return true;
 			}
 		}
 		return false;
@@ -49,8 +49,8 @@ public class Utility {
 					p.setCityName(strings[1]);
 					p.setProvince_id(provinceId);
 					coolWeatherDB.saveCity(p);
-					return true;
 				}
+				return true;
 			}
 		}
 		return false;
@@ -71,8 +71,8 @@ public class Utility {
 					p.setCountyName(strings[1]);
 					p.setCity_id(cityId);
 					coolWeatherDB.saveCounty(p);
-					return true;
 				}
+				return true;
 			}
 		}
 		return false;
