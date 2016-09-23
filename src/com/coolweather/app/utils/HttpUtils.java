@@ -25,10 +25,7 @@ public class HttpUtils {
 					conn.connect();
 					String result = null;
 					InputStream in = conn.getInputStream();
-					result = StreamUtils.readFromStream2(in);
-					
-//					System.out.println(result);
-					
+					result = StreamUtils.readFromStream(in);
 					if(listener != null){
 						listener.onFinish(result);
 					}
