@@ -1,16 +1,13 @@
 package com.coolweather.app.activity;
 
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
+import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.Window;
@@ -27,7 +24,6 @@ import com.coolweather.app.bean.Province;
 import com.coolweather.app.db.CoolWeatherDB;
 import com.coolweather.app.utils.HttpCallbackListener;
 import com.coolweather.app.utils.HttpUtils;
-import com.coolweather.app.utils.StreamUtils;
 import com.coolweather.app.utils.Utility;
 
 public class ChooseAreaActivity extends Activity {
@@ -62,12 +58,21 @@ public class ChooseAreaActivity extends Activity {
 	private List<Province> provinceList;
 	private List<City> cityList;
 	private List<County> countyList;
+	private boolean isFromWeather;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.choose_area);
+		isFromWeather = getIntent().getBooleanExtra("from_weather", false);
+		SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
+		if(sp.getBoolean("city_selected", false) && !isFromWeather){
+			Intent intent = new Intent(this, WeatherActivity.class);
+			startActivity(intent);
+			finish();
+			return;
+		}
 		lv = (ListView) findViewById(R.id.lv);
 		tv_title = (TextView) findViewById(R.id.tv_title);
 		coolWeatherDB = CoolWeatherDB.getInstance(this);
